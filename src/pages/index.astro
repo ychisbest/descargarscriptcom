@@ -1,7 +1,575 @@
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-  </head>
-  <body></body>
-</html>
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+---
+
+<BaseLayout
+  title="Descarga documentos de Scribd gratis — Sin registro, online"
+  description="Descarga documentos de Scribd, SlideShare y Studocu gratis, sin registro y sin pagar. Herramienta online gratuita para guardar PDF y presentaciones."
+>
+
+  <!-- Header -->
+  <header class="border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="text-lg font-semibold text-slate-900 tracking-tight">
+        Scribd<span class="text-blue-600">Downloader</span>
+      </a>
+      <nav class="hidden sm:flex items-center gap-6 text-sm text-slate-500">
+        <a href="#scribd" class="hover:text-slate-900 transition-colors">Scribd</a>
+        <a href="#slideshare" class="hover:text-slate-900 transition-colors">SlideShare</a>
+        <a href="#como-funciona" class="hover:text-slate-900 transition-colors">Cómo funciona</a>
+        <a href="#faq" class="hover:text-slate-900 transition-colors">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="py-20 sm:py-28 px-6">
+      <div class="max-w-2xl mx-auto text-center">
+        <h1 class="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight leading-tight">
+          Descarga documentos de Scribd gratis
+        </h1>
+        <p class="mt-5 text-lg text-slate-500 leading-relaxed">
+          Sin registro, sin pagar, sin complicaciones. Solo pega el enlace y descarga.
+        </p>
+
+        <!-- Input + Button -->
+        <div class="mt-10 flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+          <input
+            type="url"
+            id="url-input"
+            placeholder="Pega el enlace de Scribd aquí..."
+            class="flex-1 px-5 py-3.5 rounded-xl border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow text-base"
+          />
+          <button
+            id="download-btn"
+            class="px-8 py-3.5 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 active:bg-blue-800 transition-colors text-base whitespace-nowrap"
+          >
+            Descargar
+          </button>
+        </div>
+
+        <!-- Error message -->
+        <p id="error-msg" class="mt-3 text-sm text-red-500 hidden">
+          Por favor, ingresa un enlace válido de Scribd.
+        </p>
+
+        <!-- Supported platforms -->
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm text-slate-500">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Scribd
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> SlideShare
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Studocu
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Preview + Download area (hidden by default) -->
+    <section id="preview-section" class="pb-16 px-6 hidden">
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <!-- Preview header -->
+          <div class="flex items-center justify-between px-5 py-3 border-b border-slate-100 bg-slate-50">
+            <div class="flex items-center gap-2 text-sm text-slate-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              Vista previa del documento
+            </div>
+            <a
+              id="download-link"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Descargar PDF
+            </a>
+          </div>
+          <!-- iframe preview -->
+          <div class="relative" style="height: 500px;">
+            <iframe
+              id="preview-iframe"
+              class="w-full h-full border-0"
+              sandbox="allow-scripts allow-same-origin"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust badges -->
+    <section class="pb-16 px-6">
+      <div class="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+        <div class="flex flex-col items-center gap-2">
+          <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-green-600 text-xl">
+            🔒
+          </div>
+          <span class="font-medium text-slate-900 text-sm">Seguro</span>
+          <span class="text-slate-500 text-sm">No recopilamos datos personales</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 text-xl">
+            ⚡
+          </div>
+          <span class="font-medium text-slate-900 text-sm">Rápido</span>
+          <span class="text-slate-500 text-sm">Descarga en segundos</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 text-xl">
+            🆓
+          </div>
+          <span class="font-medium text-slate-900 text-sm">Gratis</span>
+          <span class="text-slate-500 text-sm">Sin costos ocultos</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="como-funciona" class="py-16 px-6 bg-white border-y border-slate-100">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-slate-900 text-center mb-4">¿Cómo funciona?</h2>
+        <p class="text-center text-slate-500 text-sm mb-10 max-w-lg mx-auto">
+          Descargar documentos nunca fue tan fácil. Nuestra herramienta funciona completamente desde el navegador, sin necesidad de instalar programas ni crear cuentas.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <div class="flex flex-col items-center text-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+              1
+            </div>
+            <div>
+              <p class="font-medium text-slate-900">Copia el enlace</p>
+              <p class="text-sm text-slate-500 mt-1">Del documento en Scribd, SlideShare o Studocu</p>
+            </div>
+          </div>
+          <div class="flex flex-col items-center text-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+              2
+            </div>
+            <div>
+              <p class="font-medium text-slate-900">Pégalo en la caja</p>
+              <p class="text-sm text-slate-500 mt-1">En el campo de arriba</p>
+            </div>
+          </div>
+          <div class="flex flex-col items-center text-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+              3
+            </div>
+            <div>
+              <p class="font-medium text-slate-900">Haz clic en Descargar</p>
+              <p class="text-sm text-slate-500 mt-1">Y obtén tu archivo al instante</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Block: Descargar Scribd -->
+    <section id="scribd" class="py-16 px-6">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4">Descargar documentos de Scribd gratis y online</h2>
+        <div class="text-slate-600 text-sm leading-relaxed space-y-4">
+          <p>
+            Scribd es una de las plataformas de documentos más grandes del mundo. Tiene millones de libros, presentaciones, apuntes y archivos subidos por usuarios de todo el planeta. Pero para acceder a la mayoría de su contenido, necesitas pagar una suscripción mensual que cuesta alrededor de $11.99 USD.
+          </p>
+          <p>
+            Si solo necesitas un documento puntual — un libro de texto, una presentación para la universidad, un informe técnico o unos apuntes de clase — pagar una suscripción completa no tiene sentido. Con nuestra herramienta puedes descargar documentos de Scribd sin pagar, sin registrarte y sin dar tu correo electrónico.
+          </p>
+          <p>
+            Solo necesitas copiar el enlace del documento que encontraste en Scribd, pegarlo en la caja de arriba y hacer clic en Descargar. La herramienta extrae el documento y te lo entrega en formato PDF, listo para guardarlo en tu computadora o celular.
+          </p>
+          <p>
+            Esto funciona para todo tipo de documentos de Scribd: libros completos, presentaciones en diapositivas, ensayos académicos, exámenes anteriores, resúmenes de capítulos, guías de estudio, manuales técnicos y mucho más. Si está en Scribd, puedes descargarlo.
+          </p>
+          <p>
+            Es importante saber que Scribd ofrece documentos en formato propio que solo se pueden leer dentro de su plataforma o app. Nuestra herramienta convierte esos archivos a PDF, un formato universal que puedes abrir en cualquier dispositivo, imprimir cuando necesites, o convertir a Word si quieres editar el contenido.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Block: SlideShare -->
+    <section id="slideshare" class="py-16 px-6 bg-white border-y border-slate-100">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4">Descargar presentaciones de SlideShare gratis</h2>
+        <div class="text-slate-600 text-sm leading-relaxed space-y-4">
+          <p>
+            SlideShare es la plataforma más popular para compartir presentaciones, diapositivas y documentos de negocios. Millones de profesores, estudiantes y profesionales suben sus presentaciones de PowerPoint, infografías y documentos de todo tipo. El problema es que SlideShare limita las descargas: necesitas una cuenta de SlideShare o de Scribd para guardar las presentaciones en tu dispositivo.
+          </p>
+          <p>
+            Con nuestra herramienta puedes descargar presentaciones de SlideShare gratis en formato PDF o PPT. Solo copia el enlace de la presentación que te interesa, pégalo en nuestra caja de herramientas y descarga el archivo completo. No necesitas crear cuenta, no necesitas iniciar sesión, no hay límites de descarga.
+          </p>
+          <p>
+            Esto es especialmente útil si encontraste una presentación de SlideShare que necesitas para tu trabajo, tesis, exposición o proyecto. Muchas presentaciones de SlideShare contienen datos, gráficos y análisis que son difíciles de encontrar en otro lugar. Guardarlas en tu dispositivo te permite consultarlas sin conexión, incluirlas en tus propias presentaciones, o simplemente tenerlas como referencia.
+          </p>
+          <p>
+            Las presentaciones se descargan en formato PDF con todas las diapositivas en orden. Si necesitas el formato PPT original para editar las diapositivas, también puedes convertir el PDF a PowerPoint después de descargarlo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Block: Studocu -->
+    <section class="py-16 px-6">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4">Descargar documentos de Studocu gratis online</h2>
+        <div class="text-slate-600 text-sm leading-relaxed space-y-4">
+          <p>
+            Studocu es una plataforma donde estudiantes de universidades de todo el mundo comparten apuntes, exámenes, resúmenes y materiales de estudio. Es especialmente popular entre estudiantes universitarios que buscan material complementario para sus clases o que quieren ver cómo fueron los exámenes de años anteriores.
+          </p>
+          <p>
+            El problema con Studocu es que la plataforma requiere que subas tus propios documentos para poder descargar los de otros estudiantes. Además, muchos documentos están bloqueados o limitados, incluso si ya pagaste una suscripción. Esto frustra a muchos estudiantes que solo necesitan un archivo puntual para preparar un examen o entregar una tarea.
+          </p>
+          <p>
+            Nuestra herramienta te permite descargar documentos de Studocu sin necesidad de subir nada a cambio. Copias el enlace del documento, lo pegas en nuestra herramienta y descargas el archivo directamente a tu dispositivo. Sin intercambios, sin suscripciones, sin complicaciones.
+          </p>
+          <p>
+            Los documentos de Studocu suelen ser exámenes anteriores, guías de estudio, resúmenes de libros de texto, apuntes de clase y material de repaso. Guardarlos en tu dispositivo te permite estudiar sin conexión, buscar dentro del texto, imprimir las páginas que necesitas, o convertir el PDF a Word para tomar notas adicionales.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Block: Descargar PDF -->
+    <section class="py-16 px-6 bg-white border-y border-slate-100">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4">Descargar PDF gratis: cómo encontrar y guardar documentos online</h2>
+        <div class="text-slate-600 text-sm leading-relaxed space-y-4">
+          <p>
+            El formato PDF es el estándar universal para documentos digitales. Casi todo lo que encuentras en internet — libros, manuales, informes, papers académicos, formularios, contratos — está en PDF. Pero no todos los sitios facilitan la descarga de estos archivos. Muchos te piden registrarte, completar encuestas, o incluso pagar para acceder a un simple documento.
+          </p>
+          <p>
+            Descargar PDF gratis es una de las búsquedas más comunes en internet. Millones de personas buscan cada día formas de guardar documentos PDF en sus dispositivos sin pasar por procesos complicados. Con nuestra herramienta, puedes descargar documentos PDF directamente desde Scribd, SlideShare y Studocu sin ningún costo.
+          </p>
+          <p>
+            Una vez que descargaste tu PDF, es posible que necesites editarlo. Muchas personas buscan cómo convertir PDF a Word para poder modificar el texto, agregar notas, o extraer información específica. El formato PDF protege el contenido original, pero a veces necesitas flexibility para trabajar con ese contenido.
+          </p>
+          <p>
+            Para convertir PDF a Word gratuitamente, existen varias opciones online que no requieren instalación. Simplemente subes tu PDF recién descargado, la herramienta lo convierte a formato Word y descargas el archivo editado. Esto es especialmente útil para estudiantes que necesitan extraer texto de libros PDF, o profesionales que necesitan adaptar documentos a sus necesidades.
+          </p>
+          <p>
+            Otro uso común es descargar PDF para imprimir. Muchos formularios, plantillas y documentos oficiales están disponibles en PDF precisamente porque el formato mantiene el diseño exacto sin importar en qué dispositivo o impresora los abras. Guardar el PDF en tu dispositivo te permite imprimirlo cuando lo necesites, cuantas veces lo necesites.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Block: PDF a Word -->
+    <section class="py-16 px-6">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4">Convertir PDF a Word: editar documentos descargados sin perder formato</h2>
+        <div class="text-slate-600 text-sm leading-relaxed space-y-4">
+          <p>
+            Descargar un PDF es solo el primer paso. La mayoría de las veces, lo que realmente necesitas es poder editar el contenido: agregar tus propias notas, corregir información, extraer páginas específicas, o adaptar el documento a un formato diferente. Ahí es donde convertir PDF a Word se vuelve esencial.
+          </p>
+          <p>
+            Si descargaste un documento de Scribd, una presentación de SlideShare o unos apuntes de Studocu, es probable que quieras modificar algo. Tal vez necesitas agregar tu nombre a un formulario, traducir un párrafo, o combinar varios documentos en uno solo. Para todo eso, necesitas el archivo en formato Word.
+          </p>
+          <p>
+            La conversión de PDF a Word se puede hacer completamente gratis desde el navegador. No necesitas instalar Microsoft Office ni ningún otro programa. Existen herramientas online gratuitas que toman tu PDF y lo convierten a un documento de Word editable, manteniendo el formato original tanto como sea posible: tablas, imágenes, encabezados y el diseño general se conservan.
+          </p>
+          <p>
+            Después de convertir el PDF a Word, puedes editarlo con cualquier procesador de texto: Microsoft Word, Google Docs, LibreOffice Writer o cualquier otro. Esto te da total libertad para trabajar con el contenido como si fuera un documento original.
+          </p>
+          <p>
+            Para obtener los mejores resultados al convertir PDF a Word, te recomendamos descargar el PDF en buena calidad primero. Documentos con texto claro y poco diseño se convierten mejor que documentos con muchas imágenes o columnas complejas. Si el PDF que descargaste es un escaneo de baja resolución, la conversión puede no ser perfecta, pero aún así te dará un archivo editable con el texto principal.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Block: Herramienta online -->
+    <section class="py-16 px-6 bg-white border-y border-slate-100">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4">Herramienta online para descargar documentos sin instalar software</h2>
+        <div class="text-slate-600 text-sm leading-relaxed space-y-4">
+          <p>
+            Una de las grandes ventajas de nuestra herramienta es que funciona 100% en línea. No necesitas descargar ni instalar ningún programa en tu computadora. No necesitas crear una cuenta. No necesitas proporcionar tu correo electrónico. No hay formularios de registro, no hay suscripciones ocultas, no hay límites diarios de uso.
+          </p>
+          <p>
+            Esto es especialmente importante si estás usando una computadora compartida, como las de una biblioteca, una universidad o un cibercafé. No quieres instalar software desconocido en esas máquinas. Con nuestra herramienta, todo se hace en el navegador: entras, pegas el enlace, descargas el archivo y listo.
+          </p>
+          <p>
+            También funciona perfectamente en dispositivos móviles. Si encontraste un documento de Scribd o SlideShare en tu celular y quieres guardarlo, puedes usar nuestra herramienta directamente desde el navegador de tu teléfono. No necesitas una app especial. El proceso es exactamente el mismo: copias el enlace, lo pegas en la herramienta y descargas el PDF a tu galería o carpeta de descargas.
+          </p>
+          <p>
+            No almacenamos ningún archivo en nuestros servidores. Las descargas se procesan en tiempo real y los archivos se transfieren directamente a tu dispositivo. Esto significa que no hay riesgo de que tu documento quede guardado en algún servidor de terceros, y tu privacidad está protegida.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Supported platforms -->
+    <section id="plataformas" class="py-16 px-6">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-slate-900 text-center mb-10">Plataformas compatibles</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="bg-white rounded-xl border border-slate-200 p-5 text-center hover:border-blue-300 hover:shadow-sm transition-all">
+            <div class="text-2xl mb-2">📄</div>
+            <p class="font-medium text-slate-900 text-sm">Scribd</p>
+            <p class="text-xs text-slate-500 mt-1">Documentos, libros, presentaciones</p>
+          </div>
+          <div class="bg-white rounded-xl border border-slate-200 p-5 text-center hover:border-blue-300 hover:shadow-sm transition-all">
+            <div class="text-2xl mb-2">📊</div>
+            <p class="font-medium text-slate-900 text-sm">SlideShare</p>
+            <p class="text-xs text-slate-500 mt-1">Presentaciones y diapositivas</p>
+          </div>
+          <div class="bg-white rounded-xl border border-slate-200 p-5 text-center hover:border-blue-300 hover:shadow-sm transition-all">
+            <div class="text-2xl mb-2">📚</div>
+            <p class="font-medium text-slate-900 text-sm">Studocu</p>
+            <p class="text-xs text-slate-500 mt-1">Apuntes, exámenes, resúmenes</p>
+          </div>
+          <div class="bg-white rounded-xl border border-slate-200 p-5 text-center hover:border-blue-300 hover:shadow-sm transition-all">
+            <div class="text-2xl mb-2">📑</div>
+            <p class="font-medium text-slate-900 text-sm">PDF</p>
+            <p class="text-xs text-slate-500 mt-1">Cualquier archivo PDF</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-16 px-6 bg-white border-y border-slate-100">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-2xl font-bold text-slate-900 text-center mb-10">Preguntas frecuentes</h2>
+        <div class="space-y-4">
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between">
+              ¿Es seguro usar esta herramienta?
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              Sí. No almacenamos tus datos ni solicitamos registro. Las descargas se procesan de forma anónima.
+            </p>
+          </details>
+
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between">
+              ¿Necesito crear una cuenta?
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              No. Puedes descargar documentos sin registrarte ni iniciar sesión en ninguna plataforma.
+            </p>
+          </details>
+
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between">
+              ¿Funciona con todos los documentos de Scribd?
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              Funciona con la mayoría de documentos públicos. Algunos archivos con restricciones especiales pueden no estar disponibles.
+            </p>
+          </details>
+
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between">
+              ¿Puedo descargar presentaciones de SlideShare?
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              Sí. Puedes descargar presentaciones en formato PDF o PPT directamente desde SlideShare.
+            </p>
+          </details>
+
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between">
+              ¿Qué formato obtengo al descargar?
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              Depende de la plataforma. Scribd documentos se descargan como PDF. SlideShare puede ser PDF o PPT.
+            </p>
+          </details>
+
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between">
+              ¿Hay límites de descarga?
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              No hay límite diario. Puedes descargar cuantos documentos necesites.
+            </p>
+          </details>
+
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between">
+              ¿Funciona en el celular?
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              Sí. La herramienta funciona en cualquier dispositivo con navegador: celular, tablet o computadora.
+            </p>
+          </details>
+
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between">
+              ¿Necesito instalar algo?
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              No. Todo funciona desde el navegador. No necesitas instalar ningún programa.
+            </p>
+          </details>
+
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between">
+              ¿Puedo descargar documentos de Scribd en formato Word?
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              Los documentos se descargan en formato PDF. Si necesitas editarlo en Word, puedes usar una herramienta de conversión PDF a Word después de descargarlo.
+            </p>
+          </details>
+
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between">
+              ¿Funciona con documentos de pago de Scribd?
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              La herramienta funciona con documentos que están disponibles para vista previa o lectura en Scribd. Algunos documentos con restricciones de acceso total pueden no estar disponibles para descarga.
+            </p>
+          </details>
+
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between">
+              ¿Puedo usar la herramienta en mi celular?
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              Sí. La herramienta funciona en cualquier dispositivo con navegador: celular, tablet o computadora. El proceso es el mismo en todos los dispositivos.
+            </p>
+          </details>
+
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between">
+              ¿Mis datos están seguros?
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              Sí. No almacenamos ningún archivo en nuestros servidores. Las descargas se procesan en tiempo real y los archivos se transfieren directamente a tu dispositivo. No recopilamos datos personales ni historial de descargas.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO content -->
+    <section class="py-16 px-6">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">
+          Descarga documentos gratis de Scribd, SlideShare y Studocu
+        </h2>
+        <div class="text-slate-600 text-sm leading-relaxed space-y-4">
+          <p>
+            Si estás buscando cómo descargar documentos de Scribd gratis, estás en el lugar correcto. Scribd alberga millones de documentos, libros, presentaciones y materiales de estudio de usuarios de todo el mundo. Desafortunadamente, acceder a estos archivos requiere una suscripción de pago que no todos pueden o quieren asumir.
+          </p>
+          <p>
+            Nuestra herramienta te permite descargar documentos de Scribd sin pagar una suscripción. Solo necesitas el enlace del documento que te interesa, pegarlo en nuestra caja de herramientas y hacer clic en Descargar. El archivo se entrega en formato PDF, que puedes guardar en tu computadora, celular o tablet.
+          </p>
+          <p>
+            Lo mismo aplica para SlideShare y Studocu. SlideShare es la plataforma líder para presentaciones y diapositivas profesionales, pero limita las descargas a usuarios con cuenta. Studocu tiene miles de exámenes, apuntes y resúmenes compartidos por estudiantes, pero requiere que subas material propio para poder descargar.
+          </p>
+          <p>
+            Con nuestra herramienta, eliminamos esas barreras. No necesitas crear cuenta en ninguna plataforma, no necesitas subir nada a cambio, no hay límites diarios de uso. Simplemente copias, pegas y descargas. Es así de simple.
+          </p>
+          <p>
+            Todos los archivos se descargan en formato PDF, el formato universal de documentos digitales. Puedes abrirlo en cualquier dispositivo, imprimirlo cuando lo necesites, o convertirlo a Word si necesitas editar el contenido. Después de descargar, el archivo es tuyo para usar como quieras.
+          </p>
+          <p>
+            No almacenamos tus archivos ni recopilamos tus datos personales. Las descargas se procesan de forma anónima y los archivos se transfieren directamente a tu dispositivo. Tu privacidad es nuestra prioridad.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 bg-white py-10 px-6">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+      <div>
+        <span class="font-medium text-slate-700">ScribdDownloader</span> — Herramienta gratuita para descargar documentos.
+      </div>
+      <div>
+        <a href="mailto:contact@descargarscript.com" class="hover:text-slate-900 transition-colors">
+          contact@descargarscript.com
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core logic -->
+  <script>
+    const input = document.getElementById('url-input') as HTMLInputElement;
+    const btn = document.getElementById('download-btn') as HTMLButtonElement;
+    const errorMsg = document.getElementById('error-msg') as HTMLElement;
+    const previewSection = document.getElementById('preview-section') as HTMLElement;
+    const previewIframe = document.getElementById('preview-iframe') as HTMLIFrameElement;
+    const downloadLink = document.getElementById('download-link') as HTMLAnchorElement;
+
+    function extractId(url: string): string | null {
+      const match = url.match(/scribd\.com\/(?:document|doc|presentation|embeds|book|audiobook)\/(\d+)/);
+      return match ? match[1] : null;
+    }
+
+    function handleDownload() {
+      const url = input.value.trim();
+
+      // Reset state
+      errorMsg.classList.add('hidden');
+      previewSection.classList.add('hidden');
+
+      if (!url) {
+        input.focus();
+        return;
+      }
+
+      const docId = extractId(url);
+
+      if (!docId) {
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+
+      // Generate embed preview URL
+      const embedUrl = `https://www.scribd.com/embeds/${docId}/content?start_page=1&view_mode=scroll&show_recommendations=false`;
+      previewIframe.src = embedUrl;
+
+      // Generate download URL via third-party API
+      const downloadUrl = `https://compress-pdf.vietdreamhouse.com/?fileurl=https://scribd.downloader.tips/pdownload/${docId}/document&title=document`;
+      downloadLink.href = downloadUrl;
+
+      // Show preview section
+      previewSection.classList.remove('hidden');
+
+      // Scroll to preview
+      previewSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    btn.addEventListener('click', handleDownload);
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        handleDownload();
+      }
+    });
+
+    // Clear error on input
+    input.addEventListener('input', () => {
+      errorMsg.classList.add('hidden');
+    });
+  </script>
+
+</BaseLayout>
