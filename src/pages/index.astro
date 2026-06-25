@@ -70,6 +70,33 @@ import '../styles/global.css';
       </div>
     </section>
 
+    <!-- Studocu Preview (hidden by default) -->
+    <section id="studocu-preview" class="pb-16 px-6 hidden">
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="flex items-center justify-between px-5 py-3 border-b border-slate-100 bg-slate-50">
+            <div class="flex items-center gap-2 text-sm text-slate-600">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span id="studocu-title">Procesando documento de Studocu...</span>
+            </div>
+          </div>
+          <div class="px-5 py-8">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+                <div id="studocu-progress-bar" class="h-full bg-blue-600 rounded-full transition-all duration-300" style="width: 0%"></div>
+              </div>
+              <span id="studocu-progress-text" class="text-xs text-slate-500 whitespace-nowrap">0%</span>
+            </div>
+            <div id="studocu-status" class="text-xs text-slate-400 font-mono">
+              Conectando con Studocu...
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Scribd Preview (hidden by default) -->
     <section id="scribd-preview" class="pb-16 px-6 hidden">
       <div class="max-w-3xl mx-auto">
@@ -590,12 +617,23 @@ import '../styles/global.css';
 
     let currentSlideImages: string[] = [];
 
+    // Studocu elements
+    const studocuPreview = document.getElementById('studocu-preview') as HTMLElement;
+    const studocuTitle = document.getElementById('studocu-title') as HTMLElement;
+    const studocuProgressBar = document.getElementById('studocu-progress-bar') as HTMLElement;
+    const studocuProgressText = document.getElementById('studocu-progress-text') as HTMLElement;
+    const studocuStatus = document.getElementById('studocu-status') as HTMLElement;
+
     function isScribdUrl(url: string): boolean {
       return /scribd\.com/.test(url);
     }
 
     function isSlideShareUrl(url: string): boolean {
       return /slideshare\.(net|com)/.test(url);
+    }
+
+    function isStudocuUrl(url: string): boolean {
+      return /studocu\.com/.test(url);
     }
 
     function extractScribdId(url: string): string | null {
@@ -607,11 +645,15 @@ import '../styles/global.css';
       errorMsg.classList.add('hidden');
       scribdPreview.classList.add('hidden');
       slidesharePreview.classList.add('hidden');
+      studocuPreview.classList.add('hidden');
       slideList.innerHTML = '';
       slideThumbnails.innerHTML = '';
       slideshareGrid.classList.add('hidden');
       progressBar.style.width = '0%';
       progressText.textContent = '0 / 0';
+      studocuProgressBar.style.width = '0%';
+      studocuProgressText.textContent = '0%';
+      studocuStatus.textContent = 'Conectando con Studocu...';
       currentSlideImages = [];
       downloadPdfBtn.disabled = true;
       downloadPptxBtn.disabled = true;
@@ -809,6 +851,71 @@ import '../styles/global.css';
       }
     }
 
+    // ─── Studocu flow (fake 30s loading) ───
+    function handleStudocu() {
+      studocuPreview.classList.remove('hidden');
+      studocuTitle.textContent = 'Procesando documento de Studocu...';
+
+      const messages = [
+        { t: 0, msg: 'Conectando con Studocu...' },
+        { t: 2000, msg: 'Buscando documento en la base de datos...' },
+        { t: 5000, msg: 'Documento encontrado, descargando páginas...' },
+        { t: 10000, msg: 'Descargando página 1 de 12...' },
+        { t: 13000, msg: 'Descargando página 5 de 12...' },
+        { t: 17000, msg: 'Descargando página 8 de 12...' },
+        { t: 20000, msg: 'Descargando página 10 de 12...' },
+        { t: 23000, msg: 'Descargando página 12 de 12...' },
+        { t: 25000, msg: 'Generando PDF...' },
+        { t: 28000, msg: 'Comprimiendo archivo...' },
+      ];
+
+      const totalDuration = 30000;
+      const startTime = Date.now();
+
+      // Progress bar animation
+      const progressInterval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const pct = Math.min(Math.round((elapsed / totalDuration) * 100), 99);
+        studocuProgressBar.style.width = `${pct}%`;
+        studocuProgressText.textContent = `${pct}%`;
+      }, 100);
+
+      // Status messages
+      messages.forEach(({ t, msg }) => {
+        setTimeout(() => {
+          studocuStatus.textContent = msg;
+        }, t);
+      });
+
+      // After 30s, show unavailable message
+      setTimeout(() => {
+        clearInterval(progressInterval);
+        studocuProgressBar.style.width = '100%';
+        studocuProgressText.textContent = '100%';
+        studocuStatus.innerHTML = '';
+
+        const unavailable = document.createElement('div');
+        unavailable.className = 'text-center py-6';
+        unavailable.innerHTML = `
+          <div class="text-amber-500 text-3xl mb-3">⚠️</div>
+          <p class="text-slate-700 font-medium mb-2">El servicio de Studocu no está disponible aún</p>
+          <p class="text-sm text-slate-500 max-w-md mx-auto">
+            Estamos trabajando para soportar descargas de Studocu en el futuro.
+            Mientras tanto, puedes usar nuestra herramienta para descargar documentos de Scribd y SlideShare.
+          </p>
+        `;
+
+        const progressArea = studocuPreview.querySelector('.px-5.py-8');
+        if (progressArea) {
+          progressArea.innerHTML = '';
+          progressArea.appendChild(unavailable);
+        }
+      }, totalDuration);
+
+      // Scroll to preview
+      studocuPreview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     // ─── Main handler ───
     async function handleDownload() {
       const url = input.value.trim();
@@ -828,6 +935,8 @@ import '../styles/global.css';
         handleScribd(docId);
       } else if (isSlideShareUrl(url)) {
         await handleSlideShare(url);
+      } else if (isStudocuUrl(url)) {
+        handleStudocu();
       } else {
         errorMsg.classList.remove('hidden');
         return;
