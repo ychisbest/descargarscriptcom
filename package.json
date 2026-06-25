@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "deploy": "npm run build && CLOUDFLARE_EMAIL=$CF_EMAIL CLOUDFLARE_API_KEY=$CF_GLOBAL_API_KEY wrangler deploy --config ./dist/server/wrangler.json",
+    "deploy:worker": "npm run deploy"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.0.0",

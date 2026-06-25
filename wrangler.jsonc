@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "descargarscriptcom",
+  "account_id": "d0a0dea9052201856b9fe7b4b4ffb079",
+  "compatibility_date": "2026-04-15",
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "31d907ff78c943698f25b37f839d0397"
+    }
+  ],
+  "images": {
+    "binding": "IMAGES"
+  },
+  "routes": [
+    {
+      "pattern": "descargarscript.com",
+      "custom_domain": true
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
