@@ -1,0 +1,51 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import Downloader from "../components/Downloader.astro";
+import RelatedPlatforms from "../components/RelatedPlatforms.astro";
+---
+
+<BaseLayout
+  title="Descargar Studocu gratis online — Descarga Script"
+  description="Descargar documentos de Studocu gratis online con Descarga Script. Pega el enlace de apuntes o exámenes, sin subir nada a cambio."
+>
+  <SiteHeader />
+  <main class="max-w-4xl mx-auto px-6 py-10">
+    <article>
+      <Breadcrumb current="Studocu" />
+      <header class="mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+          Descargar documentos de Studocu gratis online
+        </h1>
+        <p class="mt-4 text-lg text-slate-500">
+          Pega el enlace de Studocu. No pedimos que subas tus apuntes a cambio ni que pagues una suscripción.
+        </p>
+      </header>
+    </article>
+  </main>
+
+  <Downloader placeholder="Pega el enlace de Studocu..." />
+
+  <section class="px-6 pb-8">
+    <div class="max-w-3xl mx-auto text-slate-600 space-y-4 text-sm leading-relaxed">
+      <h2 class="text-2xl font-semibold text-slate-900">Qué busca la gente en Studocu</h2>
+      <p>
+        Exámenes anteriores, resúmenes y apuntes de clase. Studocu a menudo pide subir material propio para poder bajar el de otros. Esta página es el atajo de Descarga Script para ese enlace.
+      </p>
+      <h2 class="text-2xl font-semibold text-slate-900 pt-4">Cómo usarlo</h2>
+      <p>
+        Copia la URL del documento en Studocu, pégala arriba y pulsa Descargar. Si el documento no se puede procesar todavía, verás un aviso en la misma página. Mientras tanto Scribd y SlideShare sí están activos:
+        <a href="/scribd" class="text-blue-600 hover:underline">Scribd</a>
+        y
+        <a href="/slideshare" class="text-blue-600 hover:underline">SlideShare</a>.
+      </p>
+    </div>
+  </section>
+
+  <RelatedPlatforms current="studocu" />
+  <SiteFooter />
+</BaseLayout>

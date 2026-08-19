@@ -1,0 +1,81 @@
+---
+const items = [
+  {
+    q: "¿Qué es Descarga Script?",
+    a: "Descarga Script es la herramienta de descargarscript.com para guardar documentos de Scribd, presentaciones de SlideShare y material de Studocu. Pegas el enlace y descargas el archivo, sin registro.",
+  },
+  {
+    q: "¿Descargar script es lo mismo que descargar de Scribd?",
+    a: "En las búsquedas, mucha gente escribe descargar script cuando quiere bajar un documento de Scribd, SlideShare o Studocu. Esta página es esa herramienta: un descargar script online, no un repositorio de código.",
+  },
+  {
+    q: "¿Es seguro usar esta herramienta?",
+    a: "Sí. No almacenamos tus datos ni solicitamos registro. Las descargas se procesan de forma anónima.",
+  },
+  {
+    q: "¿Necesito crear una cuenta?",
+    a: "No. Puedes descargar documentos sin registrarte ni iniciar sesión en ninguna plataforma.",
+  },
+  {
+    q: "¿Funciona con todos los documentos de Scribd?",
+    a: "Funciona con la mayoría de documentos públicos. Algunos archivos con restricciones especiales pueden no estar disponibles.",
+  },
+  {
+    q: "¿Puedo descargar presentaciones de SlideShare?",
+    a: "Sí. Puedes descargar presentaciones en formato PDF o PPT desde la página de SlideShare de Descarga Script.",
+  },
+  {
+    q: "¿Qué formato obtengo al descargar?",
+    a: "Scribd se descarga como PDF. SlideShare puede ser PDF o PPT. El archivo queda en tu dispositivo.",
+  },
+  {
+    q: "¿Hay límites de descarga?",
+    a: "No hay límite diario. Puedes descargar cuantos documentos necesites.",
+  },
+  {
+    q: "¿Funciona en el celular?",
+    a: "Sí. Funciona en el navegador del celular, tablet o computadora. No hay que instalar una app.",
+  },
+  {
+    q: "¿Puedo descargar documentos de Scribd en formato Word?",
+    a: "Los documentos salen en PDF. Si necesitas editarlos, convierte el PDF a Word con otra herramienta después de descargar.",
+  },
+  {
+    q: "¿Funciona con documentos de pago de Scribd?",
+    a: "La herramienta funciona con documentos que están disponibles para vista previa o lectura en Scribd. Algunos con bloqueo total no se pueden descargar.",
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
+---
+
+<section id="faq" class="py-16 px-6 bg-white border-y border-slate-100">
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <div class="max-w-2xl mx-auto">
+    <h2 class="text-2xl font-bold text-slate-900 text-center mb-10">Preguntas frecuentes</h2>
+    <div class="space-y-4">
+      {
+        items.map((item) => (
+          <details class="group border border-slate-200 rounded-xl bg-slate-50 open:bg-white open:border-slate-300 transition-colors">
+            <summary class="px-5 py-4 cursor-pointer font-medium text-slate-900 list-none flex items-center justify-between gap-4">
+              {item.q}
+              <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
+            </summary>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

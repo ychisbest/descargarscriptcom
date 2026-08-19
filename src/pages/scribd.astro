@@ -1,0 +1,58 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import Downloader from "../components/Downloader.astro";
+import RelatedPlatforms from "../components/RelatedPlatforms.astro";
+---
+
+<BaseLayout
+  title="Descargar Scribd gratis — Descarga Script"
+  description="Descargar documentos de Scribd gratis con Descarga Script. Pega el enlace, sin registro, y guarda el PDF."
+>
+  <SiteHeader />
+  <main class="max-w-4xl mx-auto px-6 py-10">
+    <article>
+      <Breadcrumb current="Scribd" />
+      <header class="mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+          Descargar documentos de Scribd gratis
+        </h1>
+        <p class="mt-4 text-lg text-slate-500">
+          Pega el enlace del documento de Scribd. Descarga Script lo entrega en PDF, sin cuenta y sin suscripción.
+        </p>
+      </header>
+    </article>
+  </main>
+
+  <Downloader placeholder="Pega el enlace de Scribd..." />
+
+  <section class="px-6 pb-8">
+    <div class="max-w-3xl mx-auto prose-sm text-slate-600 space-y-4 text-sm leading-relaxed">
+      <h2 class="text-2xl font-semibold text-slate-900">Cómo descargar de Scribd</h2>
+      <p>
+        Abre el documento en Scribd, copia la URL (debe incluir el número del documento), pégala arriba y pulsa Descargar. Verás una vista previa y el botón para guardar el PDF.
+      </p>
+      <h2 class="text-2xl font-semibold text-slate-900 pt-4">Qué se puede bajar</h2>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Libros, apuntes y ensayos con vista previa</li>
+        <li>Presentaciones y guías de estudio</li>
+        <li>Manuales y exámenes publicados en Scribd</li>
+      </ul>
+      <p>
+        Si Scribd bloquea por completo la lectura, el archivo puede no estar disponible. No pedimos tu correo ni la contraseña de Scribd.
+      </p>
+      <h2 class="text-2xl font-semibold text-slate-900 pt-4">Formato</h2>
+      <p>
+        El archivo sale en PDF. Puedes abrirlo, imprimirlo o, si lo necesitas, convertirlo a Word después con otra herramienta. Para presentaciones usa también la página de
+        <a href="/slideshare" class="text-blue-600 hover:underline">SlideShare</a>.
+      </p>
+    </div>
+  </section>
+
+  <RelatedPlatforms current="scribd" />
+  <SiteFooter />
+</BaseLayout>

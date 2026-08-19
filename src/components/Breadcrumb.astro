@@ -1,0 +1,16 @@
+---
+interface Props {
+  current: string;
+}
+const { current } = Astro.props;
+---
+
+<nav class="mb-6" aria-label="Breadcrumb">
+  <ol class="flex items-center space-x-2 text-sm text-slate-500">
+    <li>
+      <a href="/" class="hover:text-blue-600 transition-colors">Inicio</a>
+    </li>
+    <li aria-hidden="true">/</li>
+    <li class="text-slate-900 font-medium">{current}</li>
+  </ol>
+</nav>

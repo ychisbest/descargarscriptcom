@@ -1,0 +1,52 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import Downloader from "../components/Downloader.astro";
+import RelatedPlatforms from "../components/RelatedPlatforms.astro";
+---
+
+<BaseLayout
+  title="Descargar SlideShare gratis — Descarga Script"
+  description="Descargar presentaciones de SlideShare gratis en PDF o PPT con Descarga Script. Sin cuenta y sin límite diario."
+>
+  <SiteHeader />
+  <main class="max-w-4xl mx-auto px-6 py-10">
+    <article>
+      <Breadcrumb current="SlideShare" />
+      <header class="mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+          Descargar presentaciones de SlideShare gratis
+        </h1>
+        <p class="mt-4 text-lg text-slate-500">
+          Copia el enlace de la presentación. Descarga Script arma el PDF o el PPTX con las diapositivas en orden.
+        </p>
+      </header>
+    </article>
+  </main>
+
+  <Downloader placeholder="Pega el enlace de SlideShare..." />
+
+  <section class="px-6 pb-8">
+    <div class="max-w-3xl mx-auto text-slate-600 space-y-4 text-sm leading-relaxed">
+      <h2 class="text-2xl font-semibold text-slate-900">Cómo usarlo</h2>
+      <p>
+        En SlideShare abre la presentación, copia la URL, pégala en Descarga Script y espera a que carguen las diapositivas. Después elige PDF o PPTX.
+      </p>
+      <h2 class="text-2xl font-semibold text-slate-900 pt-4">Para qué sirve</h2>
+      <p>
+        Guardar una exposición, datos de una clase o una infografía sin crear cuenta de SlideShare ni de Scribd. El PDF mantiene el orden de las diapositivas; el PPTX sirve si quieres editarlas.
+      </p>
+      <p>
+        Si el enlace no es de slideshare.net o slideshare.com, la herramienta lo rechaza. Para documentos de Scribd usa
+        <a href="/scribd" class="text-blue-600 hover:underline">la página de Scribd</a>.
+      </p>
+    </div>
+  </section>
+
+  <RelatedPlatforms current="slideshare" />
+  <SiteFooter />
+</BaseLayout>

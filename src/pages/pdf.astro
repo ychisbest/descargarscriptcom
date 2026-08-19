@@ -1,0 +1,49 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import Downloader from "../components/Downloader.astro";
+import RelatedPlatforms from "../components/RelatedPlatforms.astro";
+---
+
+<BaseLayout
+  title="Descargar PDF gratis — Descarga Script"
+  description="Descargar PDF gratis desde Scribd, SlideShare o Studocu con Descarga Script. Pega el enlace y guarda el archivo en tu dispositivo."
+>
+  <SiteHeader />
+  <main class="max-w-4xl mx-auto px-6 py-10">
+    <article>
+      <Breadcrumb current="PDF" />
+      <header class="mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+          Descargar PDF gratis
+        </h1>
+        <p class="mt-4 text-lg text-slate-500">
+          Descarga Script no es un buscador de PDFs sueltos: pegas un enlace de Scribd, SlideShare o Studocu y el archivo queda en PDF.
+        </p>
+      </header>
+    </article>
+  </main>
+
+  <Downloader placeholder="Pega el enlace de Scribd, SlideShare o Studocu..." />
+
+  <section class="px-6 pb-8">
+    <div class="max-w-3xl mx-auto text-slate-600 space-y-4 text-sm leading-relaxed">
+      <h2 class="text-2xl font-semibold text-slate-900">De dónde sale el PDF</h2>
+      <p>
+        Un documento de <a href="/scribd" class="text-blue-600 hover:underline">Scribd</a> se guarda como PDF. Una presentación de
+        <a href="/slideshare" class="text-blue-600 hover:underline">SlideShare</a> se puede bajar en PDF o PPTX. Studocu usa el mismo cuadro de enlace.
+      </p>
+      <h2 class="text-2xl font-semibold text-slate-900 pt-4">Después de descargar</h2>
+      <p>
+        El PDF se abre en cualquier celular o PC. Si necesitas editar texto, convierte el PDF a Word con otra herramienta; esta página no convierte formatos, solo descarga.
+      </p>
+    </div>
+  </section>
+
+  <RelatedPlatforms current="pdf" />
+  <SiteFooter />
+</BaseLayout>
