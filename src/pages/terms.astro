@@ -1,0 +1,38 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<BaseLayout
+  title="Términos de uso — Descarga Script"
+  description="Términos de uso de Descarga Script. Úsalo solo con documentos que tengas derecho a descargar."
+>
+  <SiteHeader />
+  <main class="max-w-2xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Términos de uso</h1>
+    <div class="mt-8 space-y-4 text-slate-600 text-sm leading-relaxed">
+      <p>
+        El sitio se ofrece tal cual, sin garantía de que un enlace concreto se pueda
+        descargar siempre. Scribd, SlideShare y Studocu pueden cambiar su formato o
+        bloquear una petición.
+      </p>
+      <p>
+        Eres responsable de usarlo solo con material que tengas derecho a obtener.
+        No uses el servicio para distribuir contenido ajeno ni para atacar otros sitios.
+      </p>
+      <p>
+        Podemos limitar el uso si hay abuso. El contacto es
+        <a
+          href="mailto:contact@descargarscript.com"
+          class="text-blue-600 border-b border-transparent hover:border-blue-600"
+        >
+          contact@descargarscript.com
+        </a>.
+      </p>
+    </div>
+  </main>
+  <SiteFooter />
+</BaseLayout>

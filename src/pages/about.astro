@@ -1,0 +1,38 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<BaseLayout
+  title="Sobre Descarga Script"
+  description="Descarga Script es una herramienta independiente para descargar documentos de Scribd, SlideShare y Studocu pegando el enlace."
+>
+  <SiteHeader />
+  <main class="max-w-2xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Sobre Descarga Script</h1>
+    <div class="mt-8 space-y-4 text-slate-600 text-sm leading-relaxed">
+      <p>
+        Descarga Script (descargarscript.com) sirve para descargar un documento de
+        Scribd, SlideShare o Studocu pegando el enlace. No hace falta cuenta ni pago.
+      </p>
+      <p>
+        El sitio lo mantiene un operador independiente. No estamos afiliados a Scribd,
+        LinkedIn SlideShare ni Studocu. El resultado habitual es un archivo PDF o una
+        presentación que puedes abrir en el celular o la computadora.
+      </p>
+      <p>
+        Contacto:
+        <a
+          href="mailto:contact@descargarscript.com"
+          class="text-blue-600 border-b border-transparent hover:border-blue-600"
+        >
+          contact@descargarscript.com
+        </a>
+      </p>
+    </div>
+  </main>
+  <SiteFooter />
+</BaseLayout>

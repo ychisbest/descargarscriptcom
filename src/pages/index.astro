@@ -12,8 +12,27 @@ import { platforms } from "../data/platforms";
 ---
 
 <BaseLayout
-  title="Descarga Script — Descargar Scribd, SlideShare y Studocu gratis"
+  title="Descarga Script: descargar Scribd y Studocu gratis"
   description="Descarga Script: descargar script online de Scribd, SlideShare y Studocu sin registro. Pega el enlace y guarda el PDF o la presentación."
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Descarga Script",
+      url: "https://descargarscript.com/",
+      description:
+        "Descargar script online de Scribd, SlideShare y Studocu sin registro.",
+      inLanguage: "es",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Descarga Script",
+      url: "https://descargarscript.com/",
+      logo: "https://descargarscript.com/web-app-manifest-512x512.png",
+      email: "contact@descargarscript.com",
+    },
+  ]}
 >
   <SiteHeader />
 

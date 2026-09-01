@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<BaseLayout
+  title="Política de privacidad — Descarga Script"
+  description="Cómo Descarga Script trata enlaces, archivos temporales y datos de uso. No pedimos cuenta."
+>
+  <SiteHeader />
+  <main class="max-w-2xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Política de privacidad</h1>
+    <div class="mt-8 space-y-4 text-slate-600 text-sm leading-relaxed">
+      <p>
+        No pedimos registro. El enlace que pegas se usa solo para generar el archivo.
+        No vendemos listas de usuarios.
+      </p>
+      <p>
+        Podemos registrar datos técnicos anónimos (página, país aproximado, tipo de
+        dispositivo) para anuncios, seguridad y estadísticas. Herramientas de terceros
+        como anuncios o medición pueden usar cookies según su propia política.
+      </p>
+      <p>
+        Los archivos se procesan para entregarte la descarga y no se publican como
+        una biblioteca abierta. Si tienes una pregunta de privacidad, escribe a
+        <a
+          href="mailto:contact@descargarscript.com"
+          class="text-blue-600 border-b border-transparent hover:border-blue-600"
+        >
+          contact@descargarscript.com
+        </a>.
+      </p>
+    </div>
+  </main>
+  <SiteFooter />
+</BaseLayout>
