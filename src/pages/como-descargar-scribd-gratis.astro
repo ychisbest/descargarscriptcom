@@ -1,0 +1,318 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import RelatedPlatforms from "../components/RelatedPlatforms.astro";
+
+const faqItems = [
+  {
+    q: "¿Hace falta una suscripción de Scribd para descargar?",
+    a: "En Scribd, el botón Descargar suele pedir cuenta Premium si el autor no dejó el archivo libre. En Descarga Script pegas el enlace y, si el documento tiene vista previa, obtienes un PDF sin pagar esa suscripción.",
+  },
+  {
+    q: "¿Qué URL tengo que pegar?",
+    a: "La del documento: scribd.com/document/ seguido del número de id. La portada, una búsqueda o el perfil de un autor no sirven.",
+  },
+  {
+    q: "¿Por qué algunos documentos no se descargan?",
+    a: "Si Scribd bloquea por completo la lectura, no hay páginas que convertir a PDF. No pedimos tu cuenta ni la contraseña para saltar ese bloqueo.",
+  },
+  {
+    q: "¿El archivo sale en Word o en PDF?",
+    a: "Siempre en PDF. Si necesitas editar texto, convierte el PDF a Word con otra herramienta después de guardar.",
+  },
+  {
+    q: "¿Pedís la contraseña de Scribd?",
+    a: "No. Solo usamos el enlace público que pegas. No hay inicio de sesión en Scribd ni recolección de cuentas.",
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "Cómo descargar documentos de Scribd gratis",
+    description:
+      "Copia la URL del documento, pégala en Descarga Script y guarda el PDF.",
+    inLanguage: "es",
+    step: [
+      {
+        "@type": "HowToStep",
+        position: 1,
+        name: "Copia la URL",
+        text: "Abre el documento en Scribd y copia la dirección que incluye /document/ y el número de id.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 2,
+        name: "Pega el enlace",
+        text: "Entra a la página Descargar Scribd de Descarga Script y pega la URL.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 3,
+        name: "Guarda el PDF",
+        text: "Pulsa Descargar y guarda el archivo PDF en el celular o la computadora.",
+      },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title="Cómo descargar documentos de Scribd gratis — guía 2026"
+  description="Pega el enlace de un documento de Scribd y descárgalo en PDF. Guía 2026 con el método oficial, Descarga Script y sus límites."
+  jsonLd={jsonLd}
+>
+  <SiteHeader />
+  <main class="max-w-3xl mx-auto px-6 py-12 sm:py-16">
+    <article>
+      <Breadcrumb current="Cómo descargar Scribd" />
+
+      <header class="mb-12">
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">
+          Guía 2026
+        </p>
+        <h1 class="mt-3 text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
+          Cómo descargar documentos de Scribd gratis
+        </h1>
+        <p class="mt-5 text-lg text-slate-500 leading-relaxed">
+          «Descargar de Scribd gratis» casi siempre significa esto: tienes un enlace,
+          no quieres pagar Premium y quieres un PDF en el celular o la PC.
+        </p>
+      </header>
+
+      <div class="space-y-12 text-slate-600 text-sm sm:text-[15px] leading-relaxed">
+        <section class="space-y-4">
+          <h2 class="text-2xl font-semibold text-slate-900 tracking-tight">
+            Qué busca la gente con «descargar de Scribd gratis»
+          </h2>
+          <p>
+            Scribd es una biblioteca online. Muchos documentos se pueden hojear, pero
+            el botón <strong>Descargar</strong> oficial suele pedir una suscripción.
+            Por eso las búsquedas no piden «leer en el navegador»: piden guardar el
+            archivo.
+          </p>
+          <p>
+            Esta página no es otro cuadro para pegar URLs. Explica el camino oficial,
+            el atajo de Descarga Script y lo que no se puede hacer. Si ya tienes el
+            enlace y solo quieres el archivo, ve directo a
+            <a
+              href="/scribd"
+              class="text-blue-600 border-b border-transparent hover:border-blue-300"
+            >
+              Descargar Scribd
+            </a>.
+          </p>
+        </section>
+
+        <section class="space-y-5">
+          <h2 class="text-2xl font-semibold text-slate-900 tracking-tight">
+            Cómo descargar desde Scribd (método oficial)
+          </h2>
+          <p>
+            El autor puede permitir la descarga. Si está activa, Scribd entrega el
+            archivo a quien tiene cuenta. Los pasos habituales:
+          </p>
+          <ol class="space-y-3">
+            <li class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 transition-colors">
+              <p class="text-xs font-semibold uppercase tracking-wide text-blue-600">Paso 1</p>
+              <p class="mt-1 font-medium text-slate-900">Inicia sesión en Scribd</p>
+              <p class="mt-2">Sin cuenta, la plataforma casi nunca muestra Descargar.</p>
+            </li>
+            <li class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 transition-colors">
+              <p class="text-xs font-semibold uppercase tracking-wide text-blue-600">Paso 2</p>
+              <p class="mt-1 font-medium text-slate-900">Abre el documento</p>
+              <p class="mt-2">
+                Entra a la ficha del libro, apunte o ensayo. Tiene que ser la página
+                del documento, no una lista de resultados.
+              </p>
+            </li>
+            <li class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 transition-colors">
+              <p class="text-xs font-semibold uppercase tracking-wide text-blue-600">Paso 3</p>
+              <p class="mt-1 font-medium text-slate-900">Pulsa Descargar si está disponible</p>
+              <p class="mt-2">
+                Si el autor lo habilitó y tu plan lo permite, Scribd guarda el archivo
+                en tu cuenta. Si aparece un muro de Premium, esa descarga oficial no
+                es gratis.
+              </p>
+            </li>
+          </ol>
+          <p>
+            Cuando el botón no aparece o pide pagar, mucha gente usa Descarga Script
+            con el mismo enlace.
+          </p>
+        </section>
+
+        <section class="space-y-5">
+          <h2 class="text-2xl font-semibold text-slate-900 tracking-tight">
+            Cómo funciona Descarga Script
+          </h2>
+          <p>
+            No pedimos registro en Scribd. El flujo es copiar la URL, pegarla en la
+            herramienta y guardar el PDF.
+          </p>
+          <div class="grid gap-4 sm:grid-cols-3">
+            <div class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 transition-colors">
+              <p class="text-xs font-semibold uppercase tracking-wide text-blue-600">1</p>
+              <h3 class="mt-2 text-base font-semibold text-slate-900">Copia la URL</h3>
+              <p class="mt-2">Desde la barra del navegador, en la ficha del documento.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 transition-colors">
+              <p class="text-xs font-semibold uppercase tracking-wide text-blue-600">2</p>
+              <h3 class="mt-2 text-base font-semibold text-slate-900">Pégala en la herramienta</h3>
+              <p class="mt-2">
+                Abre
+                <a
+                  href="/scribd"
+                  class="text-blue-600 border-b border-transparent hover:border-blue-300"
+                >
+                  Descargar Scribd
+                </a>
+                y pega el enlace.
+              </p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 transition-colors">
+              <p class="text-xs font-semibold uppercase tracking-wide text-blue-600">3</p>
+              <h3 class="mt-2 text-base font-semibold text-slate-900">Guarda el PDF</h3>
+              <p class="mt-2">Verás una vista previa y el botón para descargar el archivo.</p>
+            </div>
+          </div>
+          <a
+            href="/scribd"
+            class="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white px-5 py-4 hover:border-blue-300 hover:shadow-sm transition-all"
+          >
+            <span>
+              <span class="block font-semibold text-slate-900">Descargar Scribd</span>
+              <span class="mt-1 block text-sm text-slate-500">Pega el enlace y guarda el PDF, sin cuenta.</span>
+            </span>
+            <span class="text-sm font-semibold text-blue-600 whitespace-nowrap">Abrir →</span>
+          </a>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-2xl font-semibold text-slate-900 tracking-tight">
+            Qué URLs funcionan
+          </h2>
+          <p>
+            La dirección tiene que ser de un documento concreto, con el id numérico:
+          </p>
+          <div class="rounded-2xl border border-slate-200 bg-white px-5 py-4 font-mono text-xs sm:text-sm text-slate-700 hover:border-blue-300 transition-colors">
+            scribd.com/document/123456789/titulo-del-archivo
+          </div>
+          <p>
+            El número después de <code class="text-slate-800">/document/</code> es el
+            id. Sin ese id, la herramienta no sabe qué archivo pedir. No sirven la
+            portada de Scribd, una búsqueda, una colección ni el perfil de un autor.
+          </p>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-2xl font-semibold text-slate-900 tracking-tight">
+            Límites (qué no hacemos)
+          </h2>
+          <ul class="space-y-3">
+            <li class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 transition-colors">
+              <p class="font-medium text-slate-900">Sin cuentas ni contraseñas</p>
+              <p class="mt-1">
+                No pedimos tu login de Scribd. El enlace que pegas se usa para generar
+                el archivo; no hay recolección de credenciales.
+              </p>
+            </li>
+            <li class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 transition-colors">
+              <p class="font-medium text-slate-900">Documentos totalmente bloqueados</p>
+              <p class="mt-1">
+                Si Scribd no deja leer nada, no hay páginas que pasar a PDF. En ese
+                caso verás un aviso, no un archivo vacío.
+              </p>
+            </li>
+            <li class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 transition-colors">
+              <p class="font-medium text-slate-900">La salida es PDF</p>
+              <p class="mt-1">
+                No entregamos Word ni EPUB. El PDF se abre en cualquier dispositivo;
+                si necesitas editar, conviértelo después con otra herramienta.
+              </p>
+            </li>
+          </ul>
+          <p>
+            Usa el servicio solo con material que tengas derecho a obtener. Los
+            <a
+              href="/terms/"
+              class="text-blue-600 border-b border-transparent hover:border-blue-300"
+            >
+              términos de uso
+            </a>
+            lo dejan explícito.
+          </p>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-2xl font-semibold text-slate-900 tracking-tight">
+            Otras plataformas
+          </h2>
+          <p>
+            El mismo esquema —pegar el enlace y guardar el archivo— existe para apuntes,
+            diapositivas y PDF genérico:
+          </p>
+          <div class="grid gap-4 sm:grid-cols-3">
+            <a
+              href="/studocu"
+              class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 hover:shadow-sm transition-all"
+            >
+              <p class="font-semibold text-slate-900">Studocu</p>
+              <p class="mt-2 text-sm text-slate-500">Apuntes, exámenes y resúmenes.</p>
+            </a>
+            <a
+              href="/slideshare"
+              class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 hover:shadow-sm transition-all"
+            >
+              <p class="font-semibold text-slate-900">SlideShare</p>
+              <p class="mt-2 text-sm text-slate-500">Presentaciones en PDF o PPTX.</p>
+            </a>
+            <a
+              href="/pdf"
+              class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 hover:shadow-sm transition-all"
+            >
+              <p class="font-semibold text-slate-900">PDF</p>
+              <p class="mt-2 text-sm text-slate-500">Guardar el resultado como PDF.</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="space-y-5">
+          <h2 class="text-2xl font-semibold text-slate-900 tracking-tight">
+            Preguntas frecuentes
+          </h2>
+          <div class="space-y-4">
+            {
+              faqItems.map((item) => (
+                <div class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-blue-300 transition-colors">
+                  <h3 class="text-base font-semibold text-slate-900">{item.q}</h3>
+                  <p class="mt-2">{item.a}</p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <RelatedPlatforms current="scribd" />
+  <SiteFooter />
+</BaseLayout>

@@ -1,5 +1,13 @@
 ---
-const items = [
+type FaqLink = { href: string; text: string };
+type FaqPart = string | FaqLink;
+type FaqItem = {
+  q: string;
+  a: string;
+  body?: FaqPart[];
+};
+
+const items: FaqItem[] = [
   {
     q: "¿Qué es Descarga Script?",
     a: "Descarga Script es la herramienta de descargarscript.com para guardar documentos de Scribd, presentaciones de SlideShare y material de Studocu. Pegas el enlace y descargas el archivo, sin registro.",
@@ -7,6 +15,11 @@ const items = [
   {
     q: "¿Descargar script es lo mismo que descargar de Scribd?",
     a: "En las búsquedas, mucha gente escribe descargar script cuando quiere bajar un documento de Scribd, SlideShare o Studocu. Esta página es esa herramienta: un descargar script online, no un repositorio de código.",
+    body: [
+      "En las búsquedas, mucha gente escribe descargar script cuando quiere bajar un documento de Scribd, SlideShare o Studocu. Esta página es esa herramienta: un descargar script online, no un repositorio de código. Los pasos están en ",
+      { href: "/como-descargar-scribd-gratis/", text: "cómo descargar Scribd gratis" },
+      ".",
+    ],
   },
   {
     q: "¿Es seguro usar esta herramienta?",
@@ -19,6 +32,11 @@ const items = [
   {
     q: "¿Funciona con todos los documentos de Scribd?",
     a: "Funciona con la mayoría de documentos públicos. Algunos archivos con restricciones especiales pueden no estar disponibles.",
+    body: [
+      "Funciona con la mayoría de documentos públicos. Algunos archivos con restricciones especiales pueden no estar disponibles. Las URLs que sí sirven están en ",
+      { href: "/como-descargar-scribd-gratis/", text: "cómo descargar Scribd gratis" },
+      ".",
+    ],
   },
   {
     q: "¿Puedo descargar presentaciones de SlideShare?",
@@ -27,6 +45,11 @@ const items = [
   {
     q: "¿Qué formato obtengo al descargar?",
     a: "Scribd se descarga como PDF. SlideShare puede ser PDF o PPT. El archivo queda en tu dispositivo.",
+    body: [
+      "Scribd se descarga como PDF. SlideShare puede ser PDF o PPT. El archivo queda en tu dispositivo. Más detalle en ",
+      { href: "/como-descargar-scribd-gratis/", text: "cómo descargar Scribd gratis" },
+      ".",
+    ],
   },
   {
     q: "¿Hay límites de descarga?",
@@ -39,10 +62,20 @@ const items = [
   {
     q: "¿Puedo descargar documentos de Scribd en formato Word?",
     a: "Los documentos salen en PDF. Si necesitas editarlos, convierte el PDF a Word con otra herramienta después de descargar.",
+    body: [
+      "Los documentos salen en PDF. Si necesitas editarlos, convierte el PDF a Word con otra herramienta después de descargar. Lo explicamos en ",
+      { href: "/como-descargar-scribd-gratis/", text: "cómo descargar Scribd gratis" },
+      ".",
+    ],
   },
   {
     q: "¿Funciona con documentos de pago de Scribd?",
     a: "La herramienta funciona con documentos que están disponibles para vista previa o lectura en Scribd. Algunos con bloqueo total no se pueden descargar.",
+    body: [
+      "La herramienta funciona con documentos que están disponibles para vista previa o lectura en Scribd. Algunos con bloqueo total no se pueden descargar. Esos límites están en ",
+      { href: "/como-descargar-scribd-gratis/", text: "cómo descargar Scribd gratis" },
+      ".",
+    ],
   },
 ];
 
@@ -58,6 +91,10 @@ const jsonLd = {
     },
   })),
 };
+
+function isFaqLink(part: FaqPart): part is FaqLink {
+  return typeof part !== "string";
+}
 ---
 
 <section id="faq" class="py-16 px-6 bg-white border-y border-slate-100">
@@ -72,7 +109,22 @@ const jsonLd = {
               {item.q}
               <span class="text-slate-400 group-open:rotate-180 transition-transform">▾</span>
             </summary>
-            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">{item.a}</p>
+            <p class="px-5 pb-4 text-sm text-slate-600 leading-relaxed">
+              {item.body
+                ? item.body.map((part) =>
+                    isFaqLink(part) ? (
+                      <a
+                        href={part.href}
+                        class="text-blue-600 border-b border-transparent hover:border-blue-300"
+                      >
+                        {part.text}
+                      </a>
+                    ) : (
+                      part
+                    )
+                  )
+                : item.a}
+            </p>
           </details>
         ))
       }
