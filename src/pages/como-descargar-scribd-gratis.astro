@@ -9,6 +9,10 @@ import RelatedPlatforms from "../components/RelatedPlatforms.astro";
 
 const faqItems = [
   {
+    q: "¿Dónde pego el enlace para descargar Scribd gratis?",
+    a: "En la página de la herramienta Descargar Scribd (/scribd), no en esta guía. Aquí explicamos el método; allí se descarga el PDF.",
+  },
+  {
     q: "¿Hace falta una suscripción de Scribd para descargar?",
     a: "En Scribd, el botón Descargar suele pedir cuenta Premium si el autor no dejó el archivo libre. En Descarga Script pegas el enlace y, si el documento tiene vista previa, obtienes un PDF sin pagar esa suscripción.",
   },
@@ -76,7 +80,7 @@ const jsonLd = [
 
 <BaseLayout
   title="Cómo descargar documentos de Scribd gratis — guía 2026"
-  description="Pega el enlace de un documento de Scribd y descárgalo en PDF. Guía 2026 con el método oficial, Descarga Script y sus límites."
+  description="Cómo descargar de Scribd gratis: método oficial, límites y el atajo de Descarga Script. Guía paso a paso; CTA a la herramienta Descargar Scribd."
   jsonLd={jsonLd}
 >
   <SiteHeader />
@@ -109,15 +113,17 @@ const jsonLd = [
             archivo.
           </p>
           <p>
-            Esta página no es otro cuadro para pegar URLs. Explica el camino oficial,
-            el atajo de Descarga Script y lo que no se puede hacer. Si ya tienes el
-            enlace y solo quieres el archivo, ve directo a
+            Esta guía responde a «<strong>cómo</strong> descargar de Scribd gratis».
+            Explica el camino oficial, el atajo de Descarga Script y lo que no se puede hacer.
+            Si ya tienes el enlace y solo quieres el archivo, abre la herramienta
+            <strong>Descargar Scribd gratis</strong> en
             <a
               href="/scribd"
               class="text-blue-600 border-b border-transparent hover:border-blue-300"
             >
-              Descargar Scribd
-            </a>.
+              /scribd
+            </a>
+            (ahí está el cuadro para pegar la URL).
           </p>
         </section>
 

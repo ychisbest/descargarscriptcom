@@ -13,7 +13,7 @@ import { platforms } from "../data/platforms";
 
 <BaseLayout
   title="Descarga Script: descargar Scribd y Studocu gratis"
-  description="Descarga Script: descargar script online de Scribd, SlideShare y Studocu sin registro. Pega el enlace y guarda el PDF o la presentación."
+  description="Descarga Script: pega el enlace y descarga de Scribd, Studocu o SlideShare sin registro. Hub para bajar script / descargar script online en PDF."
   jsonLd={[
     {
       "@context": "https://schema.org",
@@ -21,7 +21,7 @@ import { platforms } from "../data/platforms";
       name: "Descarga Script",
       url: "https://descargarscript.com/",
       description:
-        "Descargar script online de Scribd, SlideShare y Studocu sin registro.",
+        "Descarga Script: pega el enlace y descarga de Scribd, Studocu o SlideShare sin registro. Hub para bajar script / descargar script online en PDF.",
       inLanguage: "es",
     },
     {
@@ -43,7 +43,8 @@ import { platforms } from "../data/platforms";
           Descarga Script
         </h1>
         <p class="mt-5 text-lg text-slate-500 leading-relaxed">
-          Descargar script gratis: pega el enlace de Scribd, SlideShare o Studocu y baja el archivo. Sin registro y sin pagar.
+          <strong>Descargar script</strong> / bajar script online: pega el enlace y guarda el archivo.
+          Elige la plataforma abajo — Scribd, Studocu, SlideShare o PDF — para no mezclar la intención de búsqueda.
         </p>
       </div>
     </section>
@@ -71,7 +72,11 @@ import { platforms } from "../data/platforms";
 
     <section id="plataformas" class="py-16 px-6">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl font-bold text-slate-900 text-center mb-10">Entra directo a la plataforma</h2>
+        <h2 class="text-2xl font-bold text-slate-900 text-center mb-3">Elige la plataforma (hub Descarga Script)</h2>
+        <p class="text-center text-sm text-slate-500 max-w-2xl mx-auto mb-10">
+          La portada responde a <strong>descargar script</strong> / bajar script.
+          Si buscas una plataforma concreta, entra a su página para alinear Title e intención:
+        </p>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {
             platforms.map((p) => (
@@ -85,6 +90,19 @@ import { platforms } from "../data/platforms";
               </a>
             ))
           }
+        </div>
+        <div class="mt-6 text-center">
+          <a
+            href="/como-descargar-scribd-gratis/"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-800 hover:border-blue-300 hover:text-blue-700 transition-colors"
+          >
+            Guía: cómo descargar Scribd gratis →
+          </a>
+          <p class="mt-2 text-xs text-slate-400">
+            La herramienta (pegar enlace) está en
+            <a href="/scribd" class="text-blue-600 hover:underline">/scribd</a>;
+            la guía explica el método y los límites.
+          </p>
         </div>
       </div>
     </section>
@@ -101,12 +119,18 @@ import { platforms } from "../data/platforms";
             para descargar documentos sin cuenta. Si buscaste descargar script, script gratis o descargar documentos de script, es este sitio: pegas un enlace y guardas el archivo.
           </p>
           <p>
-            Sirve para <a href="/scribd" class="text-blue-600 hover:underline">Scribd</a>,
-            <a href="/slideshare" class="text-blue-600 hover:underline">SlideShare</a> y
-            <a href="/studocu" class="text-blue-600 hover:underline">Studocu</a>.
-            El resultado habitual es un <a href="/pdf" class="text-blue-600 hover:underline">PDF</a> que puedes abrir en el celular o la computadora.
-            Si buscas los pasos, hay una guía de
+            Sirve para
+            <a href="/scribd" class="text-blue-600 hover:underline">descargar Scribd gratis</a>,
+            <a href="/slideshare" class="text-blue-600 hover:underline">SlideShare (PDF/PPT)</a>
+            y
+            <a href="/studocu" class="text-blue-600 hover:underline">Studocu sin subir documentos</a>.
+            El resultado habitual es un
+            <a href="/pdf" class="text-blue-600 hover:underline">PDF desde la plataforma</a>.
+            Si buscas los pasos (no el cuadro), lee
             <a href="/como-descargar-scribd-gratis/" class="text-blue-600 hover:underline">cómo descargar Scribd gratis</a>.
+            La intención corta «descargar Scribd gratis» la atiende mejor
+            <a href="/scribd" class="text-blue-600 hover:underline">la página de Scribd</a>,
+            no esta portada de marca.
           </p>
         </div>
       </div>

@@ -10,8 +10,8 @@ import RelatedPlatforms from "../components/RelatedPlatforms.astro";
 ---
 
 <BaseLayout
-  title="Descargar Studocu gratis online — Descarga Script"
-  description="Descargar documentos de Studocu gratis online con Descarga Script. Pega el enlace de apuntes o exámenes, sin subir nada a cambio."
+  title="Descargar Studocu gratis (sin subir documentos) | Descarga Script"
+  description="Descargar Studocu gratis online: apuntes y PDF sin subir material a cambio. Pega el enlace. Si buscabas Scribd, usa la página de Scribd."
 >
   <SiteHeader />
   <main class="max-w-4xl mx-auto px-6 py-10">
@@ -19,10 +19,11 @@ import RelatedPlatforms from "../components/RelatedPlatforms.astro";
       <Breadcrumb current="Studocu" />
       <header class="mb-8">
         <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-          Descargar documentos de Studocu gratis online
+          Descargar Studocu gratis sin subir documentos
         </h1>
         <p class="mt-4 text-lg text-slate-500">
-          Pega el enlace de Studocu. No pedimos que subas tus apuntes a cambio ni que pagues una suscripción.
+          <strong>Descargar Studocu gratis</strong> sin subir tus apuntes a cambio:
+          pega el enlace del documento y guarda el PDF. Sin registro ni canje de archivos.
         </p>
       </header>
     </article>
@@ -32,16 +33,39 @@ import RelatedPlatforms from "../components/RelatedPlatforms.astro";
 
   <section class="px-6 pb-8">
     <div class="max-w-3xl mx-auto text-slate-600 space-y-4 text-sm leading-relaxed">
-      <h2 class="text-2xl font-semibold text-slate-900">Qué busca la gente en Studocu</h2>
-      <p>
-        Exámenes anteriores, resúmenes y apuntes de clase. Studocu a menudo pide subir material propio para poder bajar el de otros. Esta página es el atajo de Descarga Script para ese enlace.
+      <p class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700">
+        ¿Llegaste buscando <strong>descargar Scribd</strong>? Esa herramienta está en
+        <a href="/scribd" class="text-blue-600 hover:underline">Descargar Scribd gratis</a>.
+        Esta página es solo para <strong>Studocu</strong>.
       </p>
-      <h2 class="text-2xl font-semibold text-slate-900 pt-4">Cómo usarlo</h2>
+
+      <h2 class="text-2xl font-semibold text-slate-900">Descargar Studocu gratis sin subir documentos</h2>
       <p>
-        Copia la URL del documento en Studocu, pégala arriba y pulsa Descargar. Si el documento no se puede procesar todavía, verás un aviso en la misma página. Mientras tanto Scribd y SlideShare sí están activos:
+        Studocu a menudo pide subir tus propios apuntes para desbloquear los de otros.
+        Con Descarga Script puedes <strong>descargar Studocu gratis</strong> /
+        <strong>studocu descargar pdf gratis</strong> pegando el enlace — sin canje de archivos y sin suscripción.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-slate-900 pt-4">Cómo usarlo</h2>
+      <ol class="list-decimal pl-5 space-y-2">
+        <li>Abre el apunte, examen o resumen en Studocu y copia la URL del documento.</li>
+        <li>Pégala en el cuadro de arriba y pulsa Descargar.</li>
+        <li>Guarda el PDF cuando aparezca la vista previa.</li>
+      </ol>
+      <p>
+        Si el documento no se puede procesar todavía, verás un aviso en la misma página.
+        Mientras tanto puedes usar
         <a href="/scribd" class="text-blue-600 hover:underline">Scribd</a>
-        y
+        o
         <a href="/slideshare" class="text-blue-600 hover:underline">SlideShare</a>.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-slate-900 pt-4">PDF y otras salidas</h2>
+      <p>
+        El archivo típico es PDF. Si tu enlace es de otra plataforma, usa el hub
+        <a href="/pdf" class="text-blue-600 hover:underline">Descargar PDF desde Scribd, SlideShare o Studocu</a>
+        o vuelve a la
+        <a href="/" class="text-blue-600 hover:underline">portada Descarga Script</a>.
       </p>
     </div>
   </section>

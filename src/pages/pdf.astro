@@ -10,8 +10,8 @@ import RelatedPlatforms from "../components/RelatedPlatforms.astro";
 ---
 
 <BaseLayout
-  title="Descargar PDF gratis — Descarga Script"
-  description="Descargar PDF gratis desde Scribd, SlideShare o Studocu con Descarga Script. Pega el enlace y guarda el archivo en tu dispositivo."
+  title="Descargar PDF desde Scribd, SlideShare o Studocu | Descarga Script"
+  description="Descargar PDF gratis desde un enlace de Scribd, SlideShare o Studocu. No es un buscador de PDFs sueltos: pega la URL de la plataforma."
 >
   <SiteHeader />
   <main class="max-w-4xl mx-auto px-6 py-10">
@@ -19,10 +19,13 @@ import RelatedPlatforms from "../components/RelatedPlatforms.astro";
       <Breadcrumb current="PDF" />
       <header class="mb-8">
         <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
-          Descargar PDF gratis
+          Descargar PDF desde Scribd, SlideShare o Studocu
         </h1>
         <p class="mt-4 text-lg text-slate-500">
-          Descarga Script no es un buscador de PDFs sueltos: pegas un enlace de Scribd, SlideShare o Studocu y el archivo queda en PDF.
+          Descarga Script no busca PDFs sueltos en la web: pegas un enlace de
+          <strong>Scribd</strong>, <strong>SlideShare</strong> o <strong>Studocu</strong>
+          y el archivo queda en PDF. Para la marca «descargar script», usa la
+          <a href="/" class="text-blue-600 hover:underline">portada</a>.
         </p>
       </header>
     </article>
@@ -32,14 +35,36 @@ import RelatedPlatforms from "../components/RelatedPlatforms.astro";
 
   <section class="px-6 pb-8">
     <div class="max-w-3xl mx-auto text-slate-600 space-y-4 text-sm leading-relaxed">
+      <p class="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-slate-700">
+        ¿Buscabas la marca <strong>descargar script</strong> / Descarga Script?
+        Esa es la
+        <a href="/" class="text-blue-600 hover:underline">portada</a>.
+        Esta página solo explica cómo obtener un <strong>PDF desde Scribd, SlideShare o Studocu</strong>.
+      </p>
+
       <h2 class="text-2xl font-semibold text-slate-900">De dónde sale el PDF</h2>
       <p>
-        Un documento de <a href="/scribd" class="text-blue-600 hover:underline">Scribd</a> se guarda como PDF. Una presentación de
-        <a href="/slideshare" class="text-blue-600 hover:underline">SlideShare</a> se puede bajar en PDF o PPTX. Studocu usa el mismo cuadro de enlace.
+        No indexamos una biblioteca de PDFs sueltos. Pegas un enlace de una de estas plataformas y Descarga Script arma el archivo:
       </p>
+      <div class="grid gap-3 sm:grid-cols-3 not-prose">
+        <a href="/scribd" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-blue-300 transition-colors">
+          <p class="font-semibold text-slate-900">Scribd → PDF</p>
+          <p class="mt-1 text-xs text-slate-500">Descargar Scribd gratis online</p>
+        </a>
+        <a href="/slideshare" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-blue-300 transition-colors">
+          <p class="font-semibold text-slate-900">SlideShare → PDF/PPT</p>
+          <p class="mt-1 text-xs text-slate-500">Presentaciones gratis online</p>
+        </a>
+        <a href="/studocu" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-blue-300 transition-colors">
+          <p class="font-semibold text-slate-900">Studocu → PDF</p>
+          <p class="mt-1 text-xs text-slate-500">Sin subir documentos</p>
+        </a>
+      </div>
+
       <h2 class="text-2xl font-semibold text-slate-900 pt-4">Después de descargar</h2>
       <p>
-        El PDF se abre en cualquier celular o PC. Si necesitas editar texto, convierte el PDF a Word con otra herramienta; esta página no convierte formatos, solo descarga.
+        El PDF se abre en cualquier celular o PC. Si necesitas editar texto, convierte el PDF a Word con otra herramienta;
+        esta página no convierte formatos, solo descarga desde el enlace que pegas.
       </p>
     </div>
   </section>
